@@ -1,0 +1,19 @@
+{
+  "name": "knowledge",
+  "version": "0.0.1",
+  "description": "website to record what I have learned",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/poorguy-tech/knowledge.git"
+  },
+  "author": "poorguy",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/poorguy-tech/knowledge/issues"
+  },
+  "homepage": "https://github.com/poorguy-tech/knowledge#readme"
+}
