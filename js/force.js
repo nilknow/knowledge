@@ -5,8 +5,8 @@ var forceSvg = d3.select('body')
     .append('svg')
     .attr('width', svgWidth)
     .attr('height', svgHeight)
-var nodes = [{ 'name': '1.1 编程语言' }, { 'name': '1.1.1 Java' }, { 'name': '1.1.2 Html' }]
-var edges = [{ 'source': 0, 'target': 1 }, { 'source': 0, 'target': 2 }]
+var nodes = [{ 'name': '1.1 编程语言' }, { 'name': '1.1.1 Java' }, { 'name': '1.1.2 Html' },{'name':'1.1.2.1 html介绍'},{'name':'1.1.2.2 前端路由'},{'name':'1.2 计算机网络'}]
+var edges = [{ 'source': 0, 'target': 1 }, { 'source': 0, 'target': 2 },{'source':2,'target':3},{'source':2,'target':4}]
 var force = d3.layout.force()
     .nodes(nodes)
     .links(edges)
