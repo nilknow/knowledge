@@ -46,35 +46,35 @@
             <h5 id="load-js">1.1.2.3 js的加载</h5>
             <p>
                 在html中引入js，可以使用以下方法：
-                <ul>
-                    <li>在标签中直接使用</li>
-                    <li>在script标签中使用</li>
-                    <li>通过script的src属性引用外部的js文件</li>
-                    <li>通过script的src属性和type="module"属性引用外部的js文件</li>
-                    <li>通过script标签，type属性设为module，在代码块中使用import引入</li>
-                </ul>
-                <p>通过script的src属性引用外部的js文件引用时，如果设置了defer属性，则会等到页面渲染完全以后才会执行其中的js，如果type标签设置为module，那么加载行为也和defer一样</p>
-                <p>除了defer属性，还有async属性。和defer属性不同的是，async会在js下载完成后直接执行，而且不像defer会按照script标签的顺序执行，它是无序执行的</p>
-                <p>使用module引入遵循es6的module语法，和commonJs有稍许不同</p>
-                <p>
-                    如果是使用模块+import引入js，那么有几点需要注意：
-                    <ul>
-                        <li>代码是在模块作用域之中运行，而不是在全局作用域运行。模块内部的顶层变量，外部不可见</li>
-                        <li>模块脚本自动采用严格模式，不管有没有声明<code>use strict</code></li>
-                        <li>模块之中，可以使用import命令加载其他模块（.js后缀不可省略，需要提供绝对 URL 或相对 URL），也可以使用export命令输出对外接口</li>
-                        <li>模块之中，顶层的this关键字返回undefined，而不是指向window。也就是说，在模块顶层使用this关键字，是无意义的</li>
-                    </ul>
-                    可以使用export或export default来export js脚本，import时前者需要加<code>{}</code>,后者不需要
-                </p>
+            <ul>
+                <li>在标签中直接使用</li>
+                <li>在script标签中使用</li>
+                <li>通过script的src属性引用外部的js文件</li>
+                <li>通过script的src属性和type="module"属性引用外部的js文件</li>
+                <li>通过script标签，type属性设为module，在代码块中使用import引入</li>
+            </ul>
+            <p>通过script的src属性引用外部的js文件引用时，如果设置了defer属性，则会等到页面渲染完全以后才会执行其中的js，如果type标签设置为module，那么加载行为也和defer一样</p>
+            <p>除了defer属性，还有async属性。和defer属性不同的是，async会在js下载完成后直接执行，而且不像defer会按照script标签的顺序执行，它是无序执行的</p>
+            <p>使用module引入遵循es6的module语法，和commonJs有稍许不同</p>
+            <p>
+                如果是使用模块+import引入js，那么有几点需要注意：
+            <ul>
+                <li>代码是在模块作用域之中运行，而不是在全局作用域运行。模块内部的顶层变量，外部不可见</li>
+                <li>模块脚本自动采用严格模式，不管有没有声明<code>use strict</code></li>
+                <li>模块之中，可以使用import命令加载其他模块（.js后缀不可省略，需要提供绝对 URL 或相对 URL），也可以使用export命令输出对外接口</li>
+                <li>模块之中，顶层的this关键字返回undefined，而不是指向window。也就是说，在模块顶层使用this关键字，是无意义的</li>
+            </ul>
+            可以使用export或export default来export js脚本，import时前者需要加<code>{}</code>,后者不需要
+            </p>
             </p>
             <h5 id="programming-language" class="title">1.2 计算机网络</h3>
                 <h3 id="programming-tools" class="title">1.4 编程工具</h3>
                 <h4><a href="git">1.4.1 git</a></h4>
                 <script type="module">
-                    import {canvas} from './js/canvas.js'
-                    import {rect} from './js/draw/draw_circle.js'
+                    import { canvas } from './js/canvas.js'
+                    import { rect } from './js/draw/draw_circle.js'
 
-                    rect(70,70,100,100)
+                    rect(70, 70, 100, 100)
                 </script>
 </body>
 
