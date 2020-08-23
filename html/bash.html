@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h1>bash</h1>
+        <p>参考了阮一峰的教程：<a href="https://wangdoc.com/bash/index.html">《Bash 脚本教程》发布了</a></p>
+        <h2>
+            基础知识
+        </h2>
+        <p>
+            bash是自由软件基金会重写的功能相同的sh
+            <code>bash --version</code>命令可以查看bash版本
+        </p>
+        <h2>输出</h2>
+        <p>输出使用echo命令，可以不加引号。如果想要添加多行，可以把多行文本放在引号中</p>
+        <p><code>-n</code>参数可以取消echo输出的文本末尾默认加上的换行符</p>
+        <p><code>-e</code>参数会解释引号（单引号和双引号）中的特殊字符，如<code>/n</code>，不加的话会原样输出</p>
+        <h2>命令</h2>
+        <p><code>ls -l</code>就是一个命令，命令的参数一般有短形式，如<code>-l</code>和长形式<code>--list</code>
+        短形式是为了方便手动输入，长形式一般是为了写在脚本里可读性更好</p>
+        <h2>命令的换行</h2>
+        <p>bash命令如果过长，可以用<code>\</code>来换行</p>
+        <h2>多条命令</h2>
+        <p><code>&&</code>表示第一条执行成功了，第二条才执行；<code>||</code>表示第一条执行失败了，才会执行第二条；
+        <code>;</code>表示第一条执行结束后，第二条才执行</p>
+        <h2>常用功能</h2>
+        <ul>
+            <li><code>Ctrl+L</code>清屏</li>
+            <li><code>Ctrl+C</code>中止执行中的命令</li>
+            <li><code>Shift+PageUp</code>向上滚屏</li>
+            <li><code>Shift+PageDown</code>向下滚屏</li>
+            <li><code>Ctrl+U</code>从光标位置删除到行首</li>
+            <li><code>Ctrl+K</code>从光标位置删除到行末</li>
+            <li><code>Ctrl+D</code>关闭shell会话</li>
+        </ul>
+        <p>bash和zsh一样，也有命令的自动补全功能</p>
+    </body>
+</html>
