@@ -1,39 +1,146 @@
 <html>
-    <head>
-        <meta charset="utf-8">
-    </head>
-    <body>
-        <h1>bash</h1>
-        <p>参考了阮一峰的教程：<a href="https://wangdoc.com/bash/index.html">《Bash 脚本教程》发布了</a></p>
-        <h2>
-            基础知识
-        </h2>
-        <p>
-            bash是自由软件基金会重写的功能相同的sh
-            <code>bash --version</code>命令可以查看bash版本
-        </p>
-        <h2>输出</h2>
-        <p>输出使用echo命令，可以不加引号。如果想要添加多行，可以把多行文本放在引号中</p>
-        <p><code>-n</code>参数可以取消echo输出的文本末尾默认加上的换行符</p>
-        <p><code>-e</code>参数会解释引号（单引号和双引号）中的特殊字符，如<code>/n</code>，不加的话会原样输出</p>
-        <h2>命令</h2>
-        <p><code>ls -l</code>就是一个命令，命令的参数一般有短形式，如<code>-l</code>和长形式<code>--list</code>
+
+<head>
+    <meta charset="utf-8">
+    <!-- <link rel="stylesheet" type="text/css" href="../css/article.css"> -->
+</head>
+
+<body>
+    <h1>bash</h1>
+    <p>参考了阮一峰的教程：<a href="https://wangdoc.com/bash/index.html">《Bash 脚本教程》发布了</a></p>
+    <h2>
+        基础知识
+    </h2>
+    <p>
+        bash是自由软件基金会重写的功能相同的sh
+        <code>bash --version</code>命令可以查看bash版本
+    </p>
+    <h2>输出</h2>
+    <p>输出使用echo命令，可以不加引号。如果想要添加多行，可以把多行文本放在引号中</p>
+    <p><code>-n</code>参数可以取消echo输出的文本末尾默认加上的换行符</p>
+    <p><code>-e</code>参数会解释引号（单引号和双引号）中的特殊字符，如<code>/n</code>，不加的话会原样输出</p>
+    <h2>命令</h2>
+    <p><code>ls -l</code>就是一个命令，命令的参数一般有短形式，如<code>-l</code>和长形式<code>--list</code>
         短形式是为了方便手动输入，长形式一般是为了写在脚本里可读性更好</p>
-        <h2>命令的换行</h2>
-        <p>bash命令如果过长，可以用<code>\</code>来换行</p>
-        <h2>多条命令</h2>
-        <p><code>&&</code>表示第一条执行成功了，第二条才执行；<code>||</code>表示第一条执行失败了，才会执行第二条；
+    <h2>命令的换行</h2>
+    <p>bash命令如果过长，可以用<code>\</code>来换行</p>
+    <h2>多条命令</h2>
+    <p><code>&&</code>表示第一条执行成功了，第二条才执行；<code>||</code>表示第一条执行失败了，才会执行第二条；
         <code>;</code>表示第一条执行结束后，第二条才执行</p>
-        <h2>常用功能</h2>
-        <ul>
-            <li><code>Ctrl+L</code>清屏</li>
-            <li><code>Ctrl+C</code>中止执行中的命令</li>
-            <li><code>Shift+PageUp</code>向上滚屏</li>
-            <li><code>Shift+PageDown</code>向下滚屏</li>
-            <li><code>Ctrl+U</code>从光标位置删除到行首</li>
-            <li><code>Ctrl+K</code>从光标位置删除到行末</li>
-            <li><code>Ctrl+D</code>关闭shell会话</li>
-        </ul>
-        <p>bash和zsh一样，也有命令的自动补全功能</p>
-    </body>
+    <h2>常用功能</h2>
+    <ul>
+        <li><code>Ctrl+L</code>清屏</li>
+        <li><code>Ctrl+C</code>中止执行中的命令</li>
+        <li><code>Shift+PageUp</code>向上滚屏</li>
+        <li><code>Shift+PageDown</code>向下滚屏</li>
+        <li><code>Ctrl+U</code>从光标位置删除到行首</li>
+        <li><code>Ctrl+K</code>从光标位置删除到行末</li>
+        <li><code>Ctrl+D</code>关闭shell会话</li>
+    </ul>
+    <p>bash和zsh一样，也有命令的自动补全功能</p>
+    <h2>bash的模式拓展</h2>
+    <p>模式拓展可以理解为简化了的正则表达式，它本身就是正则表达式的前身。bash命令执行前，会进行模式拓展。比如<code>cd ~</code>会切换到当前用户所在目录，
+        <code>~</code>就被模式拓展为当前目录。模式拓展有以下几种
+    <ul>
+        <li><code>~</code>表示家目录，或指定用户的家目录（~root就可以表示root用户的家目录)</li>
+        <li><code>?</code>表示单个字符的匹配</li>
+        <li><code>*</code>表示任意数量字符的匹配。在bash4.0以后的版本，如果开启了globstar，将允许使用<code>**</code>来匹配多层目录</li>
+        <li><code>[]</code>和正则表达式相同，表示匹配括号中的任意一个。可以使用<code>-</code>来表示匹配连续区间内的内容，这一点也和正则相同。
+            如果要取反可以用<code>[!a-ZA-Z]</code>这种形式来表示。如果方括号拓展没有对应的文件，bash将会原样输出，而在zsh中，会报错，这点要小心一点</li>
+        <li><code>{}</code>和方括号类似，只是使用<code>,</code>来分隔元素，使用<code>..</code>来替代<code>-</code>。
+            还可以用<code>0..8..2</code>这种形式来指定步长，这个例子最后的数字代表了每次递增都+2。
+            大括号支持嵌套，也可以和其它模式一起使用，并且先于其他条件拓展。
+            还需要注意的是，花括号的匹配是不需要匹配到的文件存在的。比如<code>d{o}g.txt</code>匹配的情况下，文件夹下没有<code>dog.txt</code>文件，匹配结果依然是<code>dog.txt</code>。
+            还有一点需要注意的是，花括号匹配中不应当有空格，有空格的话，bash就不会把它视为花括号匹配了</li>
+        <li><code>$</code>开头的词元被视作变量，将其拓展为变量值，也可以写作<code>${变量名}</code>。<code>echo ${!SH}</code>可以输出所有SH开头的变量，这里的<code>!</code>不是取反的意思
+        </li>
+        <li><code>$()</code>会将命令的输出作为返回，和<code>``</code>相同。<code>$()</code>支持嵌套</li>
+        <li><code>$(())</code>可以拓展成算术运算结果</li>
+        <li><code>[[:class:]]</code>表示字符类。如
+            <ul>
+                <li><code>[[:alnum:]]</code>表示任意英文字母和数组</li>
+                <li><code>[[:graph:]]</code>表示任意英文字母，数组和数字</li>
+                <li><code>[[:print:]]</code>ASCII码32-127的可打印字符</li>
+                <li><code>[[:punct:]]</code>表示标点符号</li>
+                <li><code>[[:blank:]]</code>表示空格和tab键</li>
+                <li><code>[[:space:]]</code>表示空格和空格、Tab、LF（10）、VT（11）、FF（12）、CR（13）</li>
+                <li><code>[[:cntrl:]]</code>表示ASCII码0-31的不可打印字符</li>
+            </ul>
+            可以写成否定形式，如<code>[![:alnum:]]</code>表示所有非数字且非字母
+        </li>
+    </ul>
+    量词语法可以表示匹配模式的次数，<code>shopt extglob</code>查看有没有打开。<code>shopt -s extglob</code>可以打开该功能，<code>-s</code>参数可以关闭。
+    如果文件名包括特殊字符如<code>*</code>，可以用单引号括起来。
+    </p>
+    <h2>shopt命令</h2>
+    <p>shopt命令可以调整bash的行为。主要介绍几个参数:
+    <ul>
+        <li><code>extglob</code>表示使bash支持ksh的语法，其中包括支持量词语法</li>
+        <li><code>dotglob</code>表示包含隐藏文件</li>
+        <li><code>nullglob</code>表示没有匹配时，返回空字符</li>
+        <li><code>failglob</code>表示没有匹配是，bash直接报错</li>
+        <li><code>nocaseglob</code>表示不区分大小写</li>
+        <li><code>globstar</code>表示支持<code>**</code>支持匹配多级目录</li>
+    </ul>
+    </p>
+    <h2>单双引号</h2>
+    <p>单引号中的所有字符都视作普通字符，如果要在单引号中使用单引号，可以写成<code>echo $'it\'s'</code>
+        或者使用双引号，写成<code>echo "it's'</code></p>
+    <p>双引号中，很多特殊字符也会失效，除了<code>$</code>，<code>`</code>和<code>\</code>。
+        双括号中也可以直接使用换行，因为换行不会被解释为命令结束了。
+        还可以用<code>echo "$(cal)"</code>这种写法来保留输出格式。如果没有双引号，就只会单行显示了</p>
+    <h2>环境变量</h2>
+    <p><code>env</code>或<code>printenv</code>显示所有的环境变量，常见的环境变量如下：
+    <ul>
+        <li><code>BASHPID</code>：bash进程的Id</li>
+        <li><code>BASHOPTS</code>：当前shell的参数，可用shopt命令修改</li>
+        <li><code>EDITOR</code>：默认的文本编辑器</li>
+        <li><code>HOME</code>：用户的主目录</li>
+        <li><code>LANG</code>：字符集以及语言编码，比如zh_CN.UTF-8</li>
+        <li><code>PWD</code>：当前工作目录</li>
+        <li><code>RANDOM</code>：返回一个0到32767之间的随机数</li>
+        <li><code>SHELL</code>：当前的shell</li>
+        <li><code>SHELLOPTS</code>：启动当前 Shell 的set命令的参数</li>
+        <li><code>TERM</code>：终端类型名，即终端仿真器所用的协议</li>
+        <li><code>UID</code>：当前用户的 ID 编号</li>
+        <li><code>USER</code>：当前用户的用户名</li>
+    </ul>
+    </p>
+    <h2>变量</h2>
+    <p>变量如果没有设置，则相当于空字符串。
+        <code>set</code>命令可用显示所有变量（环境变量和自定义变量）以及所有bash函数。</p>
+    <p>声明变量等号两边不能有空格。<code>unset</code>命令删除变量。</p>
+    <p>用户创建的变量仅可用于当前shell，其子shell默认读取不到。如果需要传递给子shell，需要使用export命令，
+        这样对于子shell来讲，export的变量就相当于环境变量。
+        变量赋值和export可用连写为<code>export USER_NAME=$USER</code>这种形式。
+        子shell修改了继承的变量，父shell对应的变量不会改变
+    </p>
+    <p>bash提供了几个特殊变量：
+    <ul>
+        <li><code>$?</code>返回上一个命令的推出码，如果是0表示执行成功，否则表示执行失败</li>
+        <li><code>$$</code>返回当前shell的进程Id</li>
+        <li><code>$_</code>返回上一个命令的最后一个参数</li>
+        <li><code>$0</code>返回当前的shell或者脚本名称（如果是在脚本中）</li>
+        <li><code>$@</code>或<code>$#</code>返回脚本的参数数量</li>
+    </ul>
+    </p>
+    <p>bash还提供了四种特殊语法来处理变量的默认值</p>
+    <p><code>declare</code>可用声明一些特殊类型的变量，为变量设置一些限制。
+    语法格式<code>declare OPTION VARIABLE=value</code>，可用的参数如下：
+    <ul>
+        <li><code>-a</code>：声明数组变量。</li>
+        <li><code>-f</code>：输出所有函数定义。</li>
+        <li><code>-F</code>：输出所有函数名。</li>
+        <li><code>-i</code>：声明整数变量。</li>
+        <li><code>-l</code>：声明变量为小写字母。</li>
+        <li><code>-p</code>：查看变量信息。</li>
+        <li><code>-r</code>：声明只读变量。</li>
+        <li><code>-u</code>：声明变量为大写字母。</li>
+        <li><code>-x</code>：该变量输出为环境变量。</li>
+    </ul>
+    不带参数的情况下，<code>declare</code>和<code>set</code>没有区别。
+    如果<code>declare</code>命令用在函数中，声明的变量只在函数内部有效，等同于<code>local</code>命令
+</p>
+</body>
+
 </html>

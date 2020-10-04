@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/article.css">
+    <title>how browser works</title>
+</head>
+
+<body>
+    <h1>浏览器工作原理</h1>
+    <h2>浏览器主体构成</h2>
+    <p1><img src="https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/layers.png" alt="浏览器架构图"></p1>
+    <h2>rendering engine</h2>
+    <p>firefox的rendering engine是gecko，chrome的是webkit。</p>
+    <p>rendering engine会先解析html，生成dom树，然后再解析css生成呈现树。呈现树构建完后，会开始进行布局的处理，确定呈现树的元素的确切坐标。这个过程不是简单的串行，而是像流水线一样，浏览器会尽快先显示一部分。</p>
+    <figure>
+    <img src="https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/webkitflow.png" alt="webkit渲染流程">
+        <figcaption>webkitflow渲染流程</figcaption>
+    </figure>
+    <h2>解析————生成语法树并编译</h2>
+    <p>
+        有几个主要知识点：
+        <ol>
+            <li><a href="https://en.wikipedia.org/wiki/Context-free_grammar">“与上下文无关的语法”（context-free grammar）</a></li>
+            <li>html的语法其实并不是上下文无关的语法，用不了通用的解析器生成器，需要rendering engine自行实现解析方法，通过状态机来实现html语法的解析</li>
+        </ol>
+        
+    </p>
+
+    <h2>参考文献</h2>
+    <a href="https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/">浏览器的工作原理：新式网络浏览器幕后揭秘</a>
+</body>
+
+</html>
